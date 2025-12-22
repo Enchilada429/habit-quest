@@ -17,27 +17,37 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const addGoodHabitButton = document.getElementById("addGoodHabit");
-  const modal = document.getElementById("modal");
-  const saveModalButton = document.getElementById("saveModal")
-  const closeModalButton = document.getElementById("closeModal");
+  const goodHabitModal = document.getElementById("goodHabitModal");
+  const saveGoodModalButton = document.getElementById("saveGoodModal")
+  const closeGoodModalButton = document.getElementById("closeGoodModal");
 
   if (addGoodHabitButton) {
     addGoodHabitButton.addEventListener("click", function () {
       console.log("add good habit button clicked")
-      modal.classList.add("open");
+      goodHabitModal.classList.add("open");
     });
   }
 
   if (saveModalButton) {
     // TODO: Needs to add to habits table
-    closeModalButton.addEventListener("click", function () {
-      modal.classList.remove("open")
+    saveGoodModalButton.addEventListener("click", function () {
+      goodHabitModal.classList.remove("open")
     })
   }
 
   if (closeModalButton) {
-    closeModalButton.addEventListener("click", function () {
-      modal.classList.remove("open");
+    closeGoodModalButton.addEventListener("click", function () {
+      goodHabitModal.classList.remove("open");
+    })
+  }
+
+  const addBadHabitButton = document.getElementById("addBadHabit");
+  const badHabitModal = document.getElementById("badHabitModal");
+  const saveBadModalButton = document.getElementById("")
+
+  if (addBadHabitButton) {
+    addBadHabitButton.addEventListener("click", function () {
+      badHabitModal.classList.add("open")
     })
   }
 

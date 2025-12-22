@@ -60,14 +60,14 @@
                                 <tr>
                                     <td>Good Habit 1</td>
                                     <td><button type="button" class="btn btn-light btn-sm">-</button>
-                                        
+                                        num
                                         <button type="button" class="btn btn-light btn-sm">+</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-success" id="addGoodHabit">Add Good Habit</button>
-                        <div class="modal" id="modal">
+                        <div class="modal" id="goodHabitModal">
                             <div class="modal-inner">
                                 <h1>Add a new good habit</h1>
                                 <p>Which habit are you looking to grow?</p>
@@ -75,10 +75,10 @@
                                     <label for="goodHabit">Good Habit:</label>
                                     <input type="text" id="goodHabit" name="goodHabit">
                                 </form>
-                                <button class="btn btn-primary" id="saveModal">
+                                <button class="btn btn-primary" id="saveGoodModal">
                                     Save
                                 </button>
-                                <button class="btn btn-secondary" id="closeModal">
+                                <button class="btn btn-secondary" id="closeGoodModal">
                                     Close
                                 </button>
                             </div>
@@ -89,14 +89,31 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td>Mark</td>
+                                    <td>Bad Habit 1</td>
                                     <td><button type="button" class="btn btn-light btn-sm">-</button>
+                                        num
                                         <button type="button" class="btn btn-light btn-sm">+</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-danger" id="addBadHabit">Add Bad Habit</button>
+                        <div class="modal" id="badHabitModal">
+                            <div class="modal-inner">
+                                <h1>Add a new bad habit</h1>
+                                <p>Which habit are you looking to shrink?</p>
+                                <form>
+                                    <label for="goodHabit">Bad Habit:</label>
+                                    <input type="text" id="goodHabit" name="goodHabit">
+                                </form>
+                                <button class="btn btn-primary" id="saveModal">
+                                    Save
+                                </button>
+                                <button class="btn btn-secondary" id="closeModal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
