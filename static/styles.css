@@ -4,7 +4,7 @@
 :root {
     --primary-color: #66ccff;
     --secondary-color: #6c757d;
-    --page-color: #f8f7ff
+    --page-color: white
 }
 
 /* body styles apply to the entire page */
@@ -20,13 +20,42 @@ footer {
     margin-top: auto;
 }
 
-.modal-container {
+.btn-secondary, .btn-primary{
+    margin: 20px;
+    color: black;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: black 2px solid;
+}
+
+.modal-inner {
+    background-color: var(--page-color);
+    border: var(--secondary-color) 6px solid;
+    padding: 35px;
+    text-align: center;
+}
+
+.modal {
     display: none;
     width: 100vh;
     height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: none;
+    
 }
 
-.modal-container.show {
+.modal.open {
     pointer-events: auto;;
     opacity: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

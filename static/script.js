@@ -17,18 +17,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const addGoodHabitButton = document.getElementById("addGoodHabit");
-  const modalContainer = document.getElementById("modal_container");
-  const closeModalButton = document.getElementById("close");
+  const modal = document.getElementById("modal");
+  const saveModalButton = document.getElementById("saveModal")
+  const closeModalButton = document.getElementById("closeModal");
 
   if (addGoodHabitButton) {
     addGoodHabitButton.addEventListener("click", function () {
-      modalContainer.classList.add("show")
+      console.log("add good habit button clicked")
+      modal.classList.add("open");
     });
+  }
+
+  if (saveModalButton) {
+    // TODO: Needs to add to habits table
+    closeModalButton.addEventListener("click", function () {
+      modal.classList.remove("open")
+    })
   }
 
   if (closeModalButton) {
     closeModalButton.addEventListener("click", function () {
-      modalContainer.classList.remove("click")
+      modal.classList.remove("open");
     })
   }
 

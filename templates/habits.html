@@ -13,11 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Custom CSS: Your own styles go here -->
-<<<<<<< HEAD
-    <link rel="stylesheet" href="../static/styles.css" />
-=======
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
->>>>>>> 07f2fbd9c4a3fa13a4c57f0cb38034727924892d
+    <link rel="stylesheet" href="../static/styles.css">
 </head>
 
 <body>
@@ -71,11 +67,18 @@
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-success" id="addGoodHabit">Add Good Habit</button>
-                        <div class="modal-container" id="modal_container">
-                            <div class=""modal>
+                        <div class="modal" id="modal">
+                            <div class="modal-inner">
                                 <h1>Add a new good habit</h1>
-                                <p>Some sort of functionality here</p>
-                                <button id="close_modal">
+                                <p>Which habit are you looking to grow?</p>
+                                <form>
+                                    <label for="goodHabit">Good Habit:</label>
+                                    <input type="text" id="goodHabit" name="goodHabit">
+                                </form>
+                                <button class="btn btn-primary" id="saveModal">
+                                    Save
+                                </button>
+                                <button class="btn btn-secondary" id="closeModal">
                                     Close
                                 </button>
                             </div>
@@ -113,7 +116,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS: Your own interactive code goes here -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="../static/script.js"></script>
 </body>
 
 </html>
