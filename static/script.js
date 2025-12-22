@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (addGoodHabitButton) {
     addGoodHabitButton.addEventListener("click", function () {
-      console.log("add good habit button clicked")
       goodHabitModal.classList.add("open");
       
       if (!habit_name) return;
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (saveGoodModalButton) {
-    // TODO: Needs to add to habits table
+    // TODO: needs to add habit to the user's good habit list
     saveGoodModalButton.addEventListener("click", function () {
       goodHabitModal.classList.remove("open")
     })
@@ -56,7 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const addBadHabitButton = document.getElementById("addBadHabit");
   const badHabitModal = document.getElementById("badHabitModal");
-  const saveBadModalButton = document.getElementById("")
+  const saveBadModalButton = document.getElementById("saveBadModal")
+  const closeBadModalButton = document.getElementById("closeBadModal")
 
   if (addBadHabitButton) {
     addBadHabitButton.addEventListener("click", function () {
@@ -74,6 +74,19 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(data.habit_name);
       })
       .catch(err => console.error(err));
+    })
+  }
+
+  if (saveBadModalButton) {
+    //TODO: needs to add habit to the user's bad habit list
+    saveBadModalButton.addEventListener("click", function () {
+      badHabitModal.classList.remove("open")
+    })
+  }
+
+  if (closeBadModalButton) {
+    closeBadModalButton.addEventListener("click", function () {
+      badHabitModal.classList.remove("open")
     })
   }
 

@@ -41,7 +41,7 @@
     </nav>
 
     <!-- Hero Section: A large, prominent section at the top of the page -->
-    <section class="hero bg-primary text-white text-center py-5">
+    <section class="hero custom-bg custom-text text-center py-5" id="heroSection">
         <div class="container">
             <h1 class="display-4 fw-bold">Habits</h1>
         </div>
@@ -54,8 +54,8 @@
             <div class="container text-center">
                 <div class="row align-items-start">
                     <div class="col">
-                        Good
-                        <table class="table">
+                        <p class="fs-2"><strong>Good</strong></p>
+                        <table class="table tables">
                             <tbody>
                                 <tr>
                                     <td>Good Habit 1</td>
@@ -66,27 +66,28 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-success" id="addGoodHabit">Add Good Habit</button>
-                        <div class="modal" id="goodHabitModal">
-                            <div class="modal-inner">
-                                <h1>Add a new good habit</h1>
-                                <p>Which habit are you looking to grow?</p>
-                                <form>
-                                    <label for="goodHabit">Good Habit:</label>
-                                    <input type="text" id="goodHabit" name="goodHabit">
-                                </form>
-                                <button class="btn btn-primary" id="saveGoodModal">
-                                    Save
-                                </button>
-                                <button class="btn btn-secondary" id="closeGoodModal">
-                                    Close
-                                </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#goodHabitModal" id="addGoodHabit">Add Good Habit</button>
+                        <div class="modal fade" tabindex="-1" aria-hidden="true" id="goodHabitModal">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <p class="modal-text">Which new habit are you looking to grow?</p>
+                                    <form>
+                                        <label for="goodHabit">Good Habit:</label>
+                                        <input type="text" class="input-boxes" id="goodHabit" name="goodHabit" placeholder="Write your good habit here...">
+                                    </form>
+                                    <button class="btn btn-primary" data-bs-dismiss=modal id="saveGoodModal">
+                                        Save
+                                    </button>
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal" id="closeGoodModal">
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        Bad
-                        <table class="table">
+                        <p class="fs-2"><strong>Bad</strong></p>
+                        <table class="table tables">
                             <tbody>
                                 <tr>
                                     <td>Bad Habit 1</td>
@@ -97,21 +98,22 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-danger" id="addBadHabit">Add Bad Habit</button>
-                        <div class="modal" id="badHabitModal">
-                            <div class="modal-inner">
-                                <h1>Add a new bad habit</h1>
-                                <p>Which habit are you looking to shrink?</p>
-                                <form>
-                                    <label for="goodHabit">Bad Habit:</label>
-                                    <input type="text" id="goodHabit" name="goodHabit">
-                                </form>
-                                <button class="btn btn-primary" id="saveModal">
-                                    Save
-                                </button>
-                                <button class="btn btn-secondary" id="closeModal">
-                                    Close
-                                </button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#badHabitModal" id="addBadHabit">Add Bad Habit</button>
+                        <div class="modal fade" tabindex="-1" aria-hidden="true" id="badHabitModal">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <p class="modal-text">Which habit are you looking to shrink?</p>
+                                    <form>
+                                        <label for="goodHabit">Bad Habit:</label>
+                                        <input type="text" class="input-boxes" id="goodHabit" name="goodHabit" placeholder="Write your bad habit here...">
+                                    </form>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal" id="saveBadModal">
+                                        Save
+                                    </button>
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal" id="closeBadModal">
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

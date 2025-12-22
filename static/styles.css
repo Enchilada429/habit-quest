@@ -4,7 +4,13 @@
 :root {
     --primary-color: #66ccff;
     --secondary-color: #6c757d;
-    --page-color: white
+    --page-color: #f1f2f6;
+    --text-color: #4f6d7a
+}
+
+#heroSection {
+    background: var(--primary-color);
+    color: var(--text-color)
 }
 
 /* body styles apply to the entire page */
@@ -12,50 +18,59 @@ body {
     /* font-family sets the text style. If the first font isn't available, it tries the next one. */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--page-color);
+    color: var(--text-color)
 }
 
 /* footer styles apply only to the <footer> element */
 footer {
     /* margin-top: auto helps push the footer to the bottom if there's little content */
-    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    width: 100%
+}
+
+.tables th, .tables td {
+    color: var(--text-color);
+    background: var(--page-color);
+}
+
+.btn-success {
+    background: #73bfb8;
+    color: var(--text-color)
+}
+
+.btn-danger {
+    background: #eb8a90;
+    color: var(--text-color)
+}
+
+.input-boxes {
+    width: 300px;
 }
 
 .btn-secondary, .btn-primary{
-    margin: 20px;
-    color: black;
+    margin: 5px;
+    color: var(--text-color);
+    padding: 5px;
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
-    border: black 2px solid;
+    margin-top: 20px;
+    background: var(--primary-color);
 }
 
-.modal-inner {
+.btn-secondary {
+    background: #eb8a90;
+}
+
+.modal-content {
     background-color: var(--page-color);
     border: var(--secondary-color) 6px solid;
+    border-radius: 20px;
     padding: 35px;
-    text-align: center;
 }
 
-.modal {
-    display: none;
-    width: 100vh;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    display: none;
-    
-}
-
-.modal.open {
-    pointer-events: auto;;
-    opacity: 1;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.modal-text {
+    font-size: 25px;
+    font-weight: semi-bold;
 }
