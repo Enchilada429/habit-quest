@@ -4,6 +4,7 @@ from os import environ as ENV, _Environ
 
 from re import match
 from bcrypt import gensalt, hashpw, checkpw
+from bson.objectid import ObjectId
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
@@ -22,7 +23,7 @@ def get_hashed_password(password: str) -> str:
     return hashpw(bytes(password, "utf-8"), gensalt())
 
 
-def get_id_using_email(mongodb_client: MongoClient, email: str) -> str:
+def get_id_using_email(mongodb_client: MongoClient, email: str) -> ObjectId:
     """Returns the Object Id of a user in account table using their email."""
 
     account_collection = mongodb_client["HabitQuest"]["account"]
@@ -87,6 +88,17 @@ def create_habit(mongodb_client: MongoClient, description: str, habit_type: str,
     })
 
 
+def delete_habit(mongodb_client: MongoClient, habit_id: str) -> None:
+    """Deletes a habit using its id as a string."""
+
+    habit_collection = mongodb_client["HabitQuest"]["habit"]
+
+    deleted = habit_collection.find_one_and_delete({"_id": ObjectId(habit_id)})
+
+    if not deleted:
+        raise ValueError("Invalid habit ID.")
+
+
 if __name__ == "__main__":
     load_dotenv()
 
@@ -94,4 +106,4 @@ if __name__ == "__main__":
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
 
-    print(get_habits(client, "seven@gmail.com"))
+    delete_habit(client, "69496cdb469178ffc5790ec2")
