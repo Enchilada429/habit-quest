@@ -22,7 +22,20 @@ def get_hashed_password(password: str) -> str:
     return hashpw(bytes(password, "utf-8"), gensalt())
 
 
-def create_account(mongodb_client: MongoClient, username: str, password: str, email: str) -> None:
+def get_id_using_email(mongodb_client: MongoClient, email: str) -> str:
+    """Returns the Object Id of a user in account table using their email."""
+
+    account_collection = mongodb_client["HabitQuest"]["account"]
+
+    account = account_collection.find_one({"email": email})
+
+    if account:
+        return account["_id"]
+
+    return None
+
+
+def create_account(mongodb_client: MongoClient, email: str, password: str, display_name: str) -> None:
     """Create a HabitQuest account with username, password, and email. Hashes the password.
     Returns error if email has invalid format."""
 
@@ -31,11 +44,20 @@ def create_account(mongodb_client: MongoClient, username: str, password: str, em
 
     account_collection = mongodb_client["HabitQuest"]["account"]
 
+    # If email already exists
+    if get_id_using_email(client, email) is not None:
+        raise ValueError("Email already exists.")
+
     account_collection.insert_one({
-        "username": username,
+        "email": email,
         "password": get_hashed_password(password),
-        "email": email
+        "displayname": display_name
     })
+
+
+def create_habit(mongodb_client: MongoClient, description: str, is_good_habit: bool, account_username: str) -> None:
+    """Create a single habit with description, whether it is good or bad, and the account to link it to."""
+    pass
 
 
 if __name__ == "__main__":
@@ -45,4 +67,4 @@ if __name__ == "__main__":
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
 
-    create_account(client, "omar", "yahya", "anotherexample@gmail.com")
+    create_account(client, "seven@gmail.com", "lll", "yoyo")
