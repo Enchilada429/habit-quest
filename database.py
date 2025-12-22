@@ -88,8 +88,24 @@ def create_habit(mongodb_client: MongoClient, description: str, habit_type: str,
     })
 
 
-def delete_habit(mongodb_client: MongoClient, habit_id: str) -> None:
-    """Deletes a habit using its id as a string."""
+def delete_account(mongodb_client: MongoClient, account_id: str) -> dict:
+    """Deletes an account in the database using its id as a string.
+    Returns the deleted account."""
+
+    account_collection = mongodb_client["HabitQuest"]["account"]
+
+    deleted = account_collection.find_one_and_delete(
+        {"_id": ObjectId(account_id)})
+
+    if not deleted:
+        raise ValueError("Invalid habit ID.")
+
+    return deleted
+
+
+def delete_habit(mongodb_client: MongoClient, habit_id: str) -> dict:
+    """Deletes a habit in the database using its id as a string.
+    Returns the deleted habit."""
 
     habit_collection = mongodb_client["HabitQuest"]["habit"]
 
@@ -97,6 +113,8 @@ def delete_habit(mongodb_client: MongoClient, habit_id: str) -> None:
 
     if not deleted:
         raise ValueError("Invalid habit ID.")
+
+    return deleted
 
 
 if __name__ == "__main__":
@@ -106,4 +124,4 @@ if __name__ == "__main__":
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
 
-    delete_habit(client, "69496cdb469178ffc5790ec2")
+    print(delete_account(client, "69495e0c4683ee94e55e3d45"))
