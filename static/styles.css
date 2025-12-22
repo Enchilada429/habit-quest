@@ -19,3 +19,14 @@ footer {
     /* margin-top: auto helps push the footer to the bottom if there's little content */
     margin-top: auto;
 }
+
+.modal-container {
+    display: none;
+    width: 100vh;
+    height: 100vh;
+}
+
+.modal-container.show {
+    pointer-events: auto;;
+    opacity: 1;
+}

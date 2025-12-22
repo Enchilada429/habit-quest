@@ -17,10 +17,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const addGoodHabitButton = document.getElementById("addGoodHabit");
+  const modalContainer = document.getElementById("modal_container");
+  const closeModalButton = document.getElementById("close");
 
   if (addGoodHabitButton) {
     addGoodHabitButton.addEventListener("click", function () {
-      
+      modalContainer.classList.add("show")
     });
   }
+
+  if (closeModalButton) {
+    closeModalButton.addEventListener("click", function () {
+      modalContainer.classList.remove("show")
+    });
+  }
+
 });
