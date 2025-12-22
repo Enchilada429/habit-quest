@@ -36,6 +36,19 @@ def get_id_using_email(mongodb_client: MongoClient, email: str) -> ObjectId:
     return None
 
 
+def get_habit(mongodb_client: MongoClient, habit_id: str) -> dict:
+    """Returns a habit given its id as a string."""
+
+    habit_collection = mongodb_client["HabitQuest"]["habit"]
+
+    habit = habit_collection.find_one({"_id": ObjectId(habit_id)})
+
+    if not habit:
+        raise ValueError("Habit not found.")
+
+    return habit
+
+
 def get_habits(mongodb_client: MongoClient, email: str) -> list[dict]:
     """Returns a list of habits for a user via their email."""
 
@@ -59,7 +72,7 @@ def create_account(mongodb_client: MongoClient, email: str, password: str, displ
     account_collection = mongodb_client["HabitQuest"]["account"]
 
     # If email already exists
-    if get_id_using_email(client, email) is not None:
+    if get_id_using_email(client, email):
         raise ValueError("Email already exists.")
 
     account_collection.insert_one({
@@ -125,7 +138,7 @@ def validate_user(mongodb_client: MongoClient, email: str, password: str) -> dic
 
     account = account_collection.find_one({"email": email})
 
-    if account is None:
+    if not account:
         raise ValueError("Email does not exist in account database.")
 
     valid = checkpw(bytes(password, "utf-8"), account["password"])
