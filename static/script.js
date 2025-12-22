@@ -11,15 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (ctaButton) {
     // This function runs whenever the button is clicked
     ctaButton.addEventListener("click", function () {
-      fetch("/test/4", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ count: 5 })
-      })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data.newCount);
-      });
       console.log("CTA button clicked");
       alert("Welcome! This is your starting point.");
     });
@@ -29,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (addGoodHabitButton) {
     addGoodHabitButton.addEventListener("click", function () {
+      
       
     });
   }

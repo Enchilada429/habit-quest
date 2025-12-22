@@ -1,5 +1,6 @@
 """Flask REST API"""
 from flask import Flask, render_template, request, jsonify
+from database import
 
 app = Flask(__name__)
 
@@ -17,15 +18,17 @@ def habits():
     return 'Error 405: Method not allowed'
 
 
-@app.route('/habits/<int:habit_id>/increment', methods=['POST'])
-def increment_habit(habit_id):
-    increment(habit_id)
+@app.route('/habits/addGoodHabit/<str:habit_name>', methods=['POST'])
+def addGoodHabit(habit_name):
+    """adds habit_name to database"""
+    print(habit_name)
     return jsonify(success=True)
 
 
-@app.route('/habits/<int:habit_id>/decrement', methods=['POST'])
-def decrement_habit(habit_id):
-    decrement(habit_id)
+@app.route('/habits/addBadHabit/<str:habit_name>', methods=['POST'])
+def addBadHabit(habit_name):
+    """adds habit_name to database"""
+    print(habit_name)
     return jsonify(success=True)
 
 
