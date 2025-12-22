@@ -19,9 +19,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const addGoodHabitButton = document.getElementById("addGoodHabit");
 
   if (addGoodHabitButton) {
-    addGoodHabitButton.addEventListener("click", function () {
-      
-      
+    addGoodHabitButton.addEventListener("click", () => {
+      const habit_name = prompt("Enter habit name");
+      if (!habit_name) return;
+
+      fetch("/addGoodHabit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ habit_name })
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.habit_name);
+      })
+      .catch(err => console.error(err));
+    });
+  }
+
+  const addBadHabitButton = document.getElementById("addGoodHabit");
+
+  if (addBadHabitButton) {
+    addBadHabitButton.addEventListener("click", () => {
+      const habit_name = prompt("Enter habit name");
+      if (!habit_name) return;
+
+      fetch("/addBadHabit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ habit_name })
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.habit_name);
+      })
+      .catch(err => console.error(err));
     });
   }
 });
