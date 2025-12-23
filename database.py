@@ -117,6 +117,18 @@ def create_habit(habit_name: str, habit_type: str, email: str) -> dict:
         return {key: str(value) for (key, value) in habit_data.items()}
 
 
+def increment_habit(habit_name: str, habit_type: str, email: str) -> dict:
+    """Increments the score of a habit"""
+    with get_mongodb_client(ENV) as client:
+
+        account = get_account_using_email(email)
+
+        if not account:
+            raise ValueError("Email does not link to a valid account.")
+        if habit_type.lower() not in ["good", "bad"]:
+            raise ValueError("Habit type must be 'good' or 'bad'.")
+
+
 def delete_account(account_id: str) -> dict:
     """Deletes an account in the database using its id as a string.
     Returns the deleted account."""
