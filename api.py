@@ -24,26 +24,15 @@ def habits():
     return 'Error 405: Method not allowed'
 
 
-@app.route('/addGoodHabit', methods=['POST'])
-def addGoodHabit():
-    """Adds new good habit to database"""
+@app.route("/addHabit", methods=["POST"])
+def addHabit():
+    """Adds new habit to database, defaults to good habit."""
     data = request.get_json()
     habit_name = data['habit_name']
     email = data["email"]
+    habit_type = request.args.get("habit_type", "good")
 
-    new_habit = create_habit(habit_name, "good", email)
-
-    return jsonify(new_habit)
-
-
-@app.route('/addBadHabit', methods=['POST'])
-def addBadHabit():
-    """Adds new bad habit to database"""
-    data = request.get_json()
-    habit_name = data['habit_name']
-    email = data["email"]
-
-    new_habit = create_habit(habit_name, "bad", email)
+    new_habit = create_habit(habit_name, habit_type, email)
 
     return jsonify(new_habit)
 
