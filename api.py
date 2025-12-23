@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 
 from dotenv import load_dotenv
 
-from database import create_habit, get_habits
+from database import create_habit, get_habits, create_wishlist_entry
 
 app = Flask(__name__)
 
@@ -67,6 +67,15 @@ def get_bad_habits(email):
         return {"error": True, "message": str(e)}
 
 
+@app.route("/wishlist/<email>", methods=["GET"])
+def get_wishlist(email):
+    """Gets the wishlist of a user based on their email."""
+    try:
+        return get_wishlist(email)
+    except ValueError as e:
+        return {"error": True, "message": str(e)}
+
+
 @app.route("/addHabit", methods=["POST"])
 def add_habit():
     """Adds new habit to database, defaults to good habit."""
@@ -80,7 +89,20 @@ def add_habit():
     return jsonify(new_habit)
 
 
-@app.route("/deleteHabit<id>", methods=["POST"])
+@app.route("/wishlist", methods=["POST"])
+def add_wishlist_entry():
+    """Adds new wishlist entry to database."""
+    data = request.get_json()
+    entry_name = data["entry_name"]
+    cost = data["cost"]
+    # email = data["email"]
+
+    new_wishlist_entry = create_wishlist_entry(entry_name, cost, DEFAULT_EMAIL)
+
+    return jsonify(new_wishlist_entry)
+
+
+@app.route("/deleteHabit/<id>", methods=["DELETE"])
 def delete_habit(id):
     """Deletes habit from database using its id."""
     try:

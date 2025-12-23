@@ -117,6 +117,32 @@ def create_habit(habit_name: str, habit_type: str, email: str) -> dict:
         return {key: str(value) for (key, value) in habit_data.items()}
 
 
+def create_wishlist_entry(name: str, cost: int, email: str) -> dict:
+    """Creates an entry in the wishlist table with a name, cost and associated account email.
+    Returns the entry in dict format."""
+
+    with get_mongodb_client(ENV) as client:
+
+        account = get_account_using_email(email)
+
+        if not account:
+            raise ValueError("Email does not link to a valid account.")
+        if not isinstance(cost, int):
+            raise ValueError("Cost given is not an integer.")
+
+        wishlist_collection = client["HabitQuest"]["wishlist"]
+
+        wishlist_entry = {
+            "name": name,
+            "cost": cost,
+            "account_id": account["_id"]
+        }
+
+        wishlist_collection.insert_one(wishlist_entry)
+
+        return {key: str(value) for (key, value) in wishlist_entry.items()}
+
+
 def delete_account(account_id: str) -> dict:
     """Deletes an account in the database using its id as a string.
     Returns the deleted account."""
@@ -144,6 +170,23 @@ def delete_habit(habit_id: str) -> dict:
 
         deleted = habit_collection.find_one_and_delete(
             {"_id": ObjectId(habit_id)})
+
+        if not deleted:
+            raise ValueError("Invalid habit ID.")
+
+        return deleted
+
+
+def delete_wishlist_entry(entry_id: str) -> dict:
+    """Deletes a wishlist entry in the database using its id as a string.
+    Returns the deleted entry."""
+
+    with get_mongodb_client(ENV) as client:
+
+        wishlist_collection = client["HabitQuest"]["wishlist"]
+
+        deleted = wishlist_collection.find_one_and_delete(
+            {"_id": ObjectId(entry_id)})
 
         if not deleted:
             raise ValueError("Invalid habit ID.")
