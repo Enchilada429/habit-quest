@@ -24,6 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
   if (addGoodHabitButton) {
     addGoodHabitButton.addEventListener("click", function () {
       goodHabitModal.classList.add("open");
+    });
+  }
+
+  if (saveGoodModalButton) {
+    saveGoodModalButton.addEventListener("click", function () {
+
+      habit_name = document.getElementById("goodHabit").value;
       
       if (!habit_name) return;
 
@@ -37,14 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(data.habit_name);
       })
       .catch(err => console.error(err));
-    });
-  }
 
-  if (saveGoodModalButton) {
-    // TODO: needs to add habit to the user's good habit list
-    saveGoodModalButton.addEventListener("click", function () {
-      goodHabitModal.classList.remove("open")
-    })
+      goodHabitModal.classList.remove("open");
+    });
   }
 
   if (closeGoodModalButton) {
@@ -61,7 +63,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (addBadHabitButton) {
     addBadHabitButton.addEventListener("click", function () {
       badHabitModal.classList.add("open")
+    });
+  }
 
+  if (saveBadModalButton) {
+    saveBadModalButton.addEventListener("click", function () {
+
+      habit_name = document.getElementById("badHabit").value;
+      
       if (!habit_name) return;
 
       fetch("/addHabit?habit_type=bad", {
@@ -74,14 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(data.habit_name);
       })
       .catch(err => console.error(err));
-    })
-  }
 
-  if (saveBadModalButton) {
-    //TODO: needs to add habit to the user's bad habit list
-    saveBadModalButton.addEventListener("click", function () {
-      badHabitModal.classList.remove("open")
-    })
+      badHabitModal.classList.remove("open");
+    });
   }
 
   if (closeBadModalButton) {

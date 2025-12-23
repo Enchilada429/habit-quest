@@ -1,7 +1,5 @@
 """Flask REST API"""
 
-from os import environ as ENV
-
 from flask import Flask, render_template, request, jsonify
 
 from dotenv import load_dotenv
@@ -32,7 +30,7 @@ def addHabit():
     """Adds new habit to database, defaults to good habit."""
     data = request.get_json()
     habit_name = data['habit_name']
-    email = data["email"]
+    # email = data["email"]
     habit_type = request.args.get("habit_type", "good")
 
     new_habit = create_habit(habit_name, habit_type, DEFAULT_EMAIL)
@@ -50,4 +48,4 @@ if __name__ == "__main__":
 
     load_dotenv()
 
-    app.run(debug=True)
+    app.run(port=8000, debug=True)
