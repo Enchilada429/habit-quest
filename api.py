@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 
 from dotenv import load_dotenv
 
-from database import create_habit, get_habits, create_wishlist_entry
+from database import create_habit, get_habits, create_wishlist_entry, delete_wishlist_entry
 
 app = Flask(__name__)
 
@@ -107,6 +107,15 @@ def delete_habit(id):
     """Deletes habit from database using its id."""
     try:
         return delete_habit(id)
+    except ValueError as e:
+        return {"error": True, "message": str(e)}
+
+
+@app.route("/wishlist/<id>", methods=["DELETE"])
+def delete_single_wishlist_entry(id):
+    """Deletes a wishlist entry from database using its id."""
+    try:
+        return delete_wishlist_entry(id)
     except ValueError as e:
         return {"error": True, "message": str(e)}
 
