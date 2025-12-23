@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 
 from dotenv import load_dotenv
 
-from database import create_habit, get_habits, create_wishlist_entry, delete_wishlist_entry
+from database import create_habit, get_habits, create_wishlist_entry, delete_wishlist_entry, increment_habit_points, decrement_habit_points
 
 app = Flask(__name__)
 
@@ -126,6 +126,22 @@ def delete_single_wishlist_entry(id):
         return delete_wishlist_entry(id)
     except ValueError as e:
         return {"error": True, "message": str(e)}
+
+
+@app.route("/incrementPoints/<habitid>", methods=["POST"])
+def increment_points(habitid):
+    if request.method == "POST":
+        return increment_habit_points(habitid)
+
+    return {"error": True, "message": "405 method not allowed"}
+
+
+@app.route("/decrementPoints/<habitid>", methods=["POST"])
+def decrement_points(habitid):
+    if request.method == "POST":
+        return decrement_habit_points(habitid)
+
+    return {"error": True, "message": "405 method not allowed"}
 
 
 @app.route('/test/<int:number>', methods=['POST'])
