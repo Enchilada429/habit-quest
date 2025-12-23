@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 
 from dotenv import load_dotenv
 
-from database import create_habit
+from database import create_habit, get_habits
 
 app = Flask(__name__)
 
@@ -25,8 +25,26 @@ def habits():
     return 'Error 405: Method not allowed'
 
 
+@app.route("/goodHabits/<email>", methods=["GET"])
+def get_good_habits(email):
+    """Gets a list of good habits for the account associated with the email."""
+    try:
+        return [habit for habit in get_habits(email) if habit["habit_type"] == "good"]
+    except ValueError as e:
+        return {"error": e}
+
+
+@app.route("/badHabits/<email>", methods=["GET"])
+def get_good_habits(email):
+    """Gets a list of bad habits for the account associated with the email."""
+    try:
+        return [habit for habit in get_habits(email) if habit["habit_type"] == "bad"]
+    except ValueError as e:
+        return {"error": e}
+
+
 @app.route("/addHabit", methods=["POST"])
-def addHabit():
+def add_habit():
     """Adds new habit to database, defaults to good habit."""
     data = request.get_json()
     habit_name = data['habit_name']
