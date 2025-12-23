@@ -7,6 +7,7 @@ from bcrypt import gensalt, hashpw, checkpw
 from bson.objectid import ObjectId
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from pymongo import ReturnDocument
 from dotenv import load_dotenv
 
 
@@ -209,6 +210,42 @@ def validate_user(email: str, password: str) -> dict:
         raise ValueError("Given password does not match account password.")
 
     return account
+
+
+def add_to_habit_points(habit_id: str, num_points: int) -> dict:
+    """Adds to the points for a particular habit via its id.
+    Returns the new habit entry with updated points."""
+
+    with get_mongodb_client(ENV) as client:
+
+        habit_collection = client["HabitQuest"]["habit"]
+
+        original_habit = habit_collection.find_one({"_id": ObjectId(habit_id)})
+
+        if not original_habit:
+            raise ValueError("Invalid habit ID.")
+
+        updated = habit_collection.find_one_and_update(
+            {"_id": ObjectId(habit_id)},
+            {"$set": {"points": original_habit["points"] + num_points}},
+            return_document=ReturnDocument.AFTER
+        )
+
+        return updated
+
+
+def increment_habit_points(habit_id: str) -> dict:
+    """Increments the points for a particular habit by 1 via its id.
+    Returns the new habit entry with updated points."""
+
+    return add_to_habit_points(habit_id, 1)
+
+
+def decrement_habit_points(habit_id: str) -> dict:
+    """Decrements the points for a particular habit by 1 via its id.
+    Returns the new habit entry with updated points."""
+
+    return add_to_habit_points(habit_id, -1)
 
 
 if __name__ == "__main__":
