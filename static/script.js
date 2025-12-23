@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
       if (!habit_name) return;
 
-      fetch("/addGoodHabit", {
+      fetch("/addHabit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ habit_name })
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!habit_name) return;
 
-      fetch("/addBadHabit", {
+      fetch("/addHabit?habit_type=bad", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ habit_name })
