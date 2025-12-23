@@ -35,7 +35,7 @@ def get_good_habits(email):
 
 
 @app.route("/badHabits/<email>", methods=["GET"])
-def get_good_habits(email):
+def get_bad_habits(email):
     """Gets a list of bad habits for the account associated with the email."""
     try:
         return [habit for habit in get_habits(email) if habit["habit_type"] == "bad"]
