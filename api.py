@@ -6,9 +6,12 @@ from flask import Flask, render_template, request, jsonify
 
 from dotenv import load_dotenv
 
-from database import get_mongodb_client, create_habit
+from database import create_habit
 
 app = Flask(__name__)
+
+DEFAULT_EMAIL = "example@gmail.com"
+DEFAULT_PASSWORD = "example"
 
 
 @app.route('/')
@@ -32,7 +35,7 @@ def addHabit():
     email = data["email"]
     habit_type = request.args.get("habit_type", "good")
 
-    new_habit = create_habit(habit_name, habit_type, email)
+    new_habit = create_habit(habit_name, habit_type, DEFAULT_EMAIL)
 
     return jsonify(new_habit)
 

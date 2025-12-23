@@ -174,4 +174,4 @@ if __name__ == "__main__":
     client.admin.command('ping')
     print("Pinged your deployment. You successfully connected to MongoDB!")
 
-    print(validate_user("anotherexample@gmail.com", "yahya"))
+    create_account("example@gmail.com", "example", "example_display_name")
