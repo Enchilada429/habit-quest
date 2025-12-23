@@ -108,7 +108,7 @@ def create_habit(habit_name: str, habit_type: str, email: str) -> dict:
         habit_data = {
             "habit_name": habit_name,
             "habit_type": habit_type.lower(),
-            "count": 0,
+            "points": 0,
             "account_id": account["_id"]
         }
 
