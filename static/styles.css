@@ -13,6 +13,11 @@
     color: var(--text-color)
 }
 
+#points-navbar {
+    margin-left: 375px;
+    color: white;
+}
+
 /* body styles apply to the entire page */
 body {
     /* font-family sets the text style. If the first font isn't available, it tries the next one. */
